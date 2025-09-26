@@ -1,0 +1,144 @@
+/* === Base Reset === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* === Body Styling === */
+body {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background: linear-gradient(315deg, rgb(170, 0, 255), rgb(47, 0, 255));
+  padding: 20px; /* prevent edge clipping on small devices */
+}
+
+/* === Login Container === */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 450px;
+
+  border: 5px solid rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  padding: 28px 24px;
+  color: white;
+  text-align: center;
+}
+
+/* === Intro Paragraph === */
+.intro-text {
+  margin-bottom: 20px;
+}
+
+.intro-text h1{
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0f0f0
+}
+.intro-text p {
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: left;
+  color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+/* === Login Form === */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* Inputs and selects */
+.login-form input,
+.login-form select {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Labels */
+.login-form label {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Button styling */
+.login-form button {
+  padding: 12px;
+  background-color: white;
+  color: #4b00ff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-form button:hover {
+  background-color: #e0e0e0;
+}
+.login-form button:active {
+  background-color: #c0c0c0;
+}
+/* === Footer Styling === */
+.footer {
+  margin-top: 110px;
+  font-size: 18px;
+  padding: 12px 16px;
+  align-items: center; 
+  font-weight: bold;
+  color: white;
+}
+
+/* === Responsive Design for Small Screens === */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 20px 16px;
+  }
+
+  .intro-text p {
+    font-size: 13.5px;
+    padding: 10px 12px;
+  }
+
+  .login-form {
+    gap: 12px;
+  }
+
+  .login-form input,
+  .login-form select {
+    font-size: 14px;
+    padding: 9px 10px;
+  }
+
+  .login-form label {
+    font-size: 13.5px;
+    margin-bottom: 3px;
+  }
+
+  .login-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

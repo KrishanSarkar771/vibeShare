@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vibeShare</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="intro-text">
+        <h1>vibeShare</h1>
+        <p>
+            VibeShare is an innovative platform designed to connect people through voice-based interaction. 
+            Unlike traditional text-based systems, VibeShare encourages real-time communication, allowing users 
+            to share their thoughts, ideas, and emotions in a more natural and engaging way. The platform integrates 
+            a modern interface with features like instant voice sharing, seamless connectivity, and an intuitive 
+            design that makes conversations simple yet impactful. By blending communication with technology, 
+            VibeShare aims to create a space where users can express themselves freely and connect within BCREC.
+        </p>
+    </div>
+
+    <div class="login-container">
+        <h2>Login to Continue</h2>
+        <form action="users.html" method="GET" class="login-form">
+            <input type="text" name="username" placeholder="Enter your Username" required>
+
+            <select id="Dept" name="Dept" required>
+                <option value="" disabled selected>Select your Department</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EE">EE</option>
+            </select>
+
+            <input type="password" name="password" placeholder="Enter the Password" required>
+
+            <button type="submit">Start</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Dedicated to Mark Zuckerberg.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="users.css">
+    <title>vibeShare</title>
+</head>
+<body>
+    <h1>vibeShare</h1>
+    
+    <p>Your ID: <span id="myId">Connecting...</span></p>
+    <p id="status">Waiting for connection...</p>
+
+    <div class="users-container">
+        <p>Users Online: <span id="userCount">0</span></p>
+        <div id="users">
+        </div>
+            <div class="videos">
+                <video id="local-video" autoplay muted></video>
+                <video id="remote-video" autoplay></video>
+        </div>
+    </div>
+    <div class="footer">
+        <button id="video-button">Stop Video</button>
+        <button id="next-button" class="next">Find Next Person</button>
+
+    </div>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
