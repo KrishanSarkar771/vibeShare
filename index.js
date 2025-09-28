@@ -10,16 +10,16 @@ const io = new SocketIO(server);
 const PORT = process.env.PORT || 8000;
 
 const waitingQueue = [];             // Users waiting to be paired
-const activePairs = new Map();       // Map: socket.id => partnerId
+const activePairs = new Map();       // socket.id => partnerId
 
-// ========== Matchmaking Logic ==========
+// Attempt to match users from the waiting queue
 function tryMatchUsers() {
     while (waitingQueue.length >= 2) {
         const userA = waitingQueue.shift();
         const userB = waitingQueue.shift();
 
-        // Prevent matching user with themselves (edge case)
         if (userA === userB) {
+            // Edge case: same user (shouldn't happen, but be safe)
             waitingQueue.unshift(userB);
             continue;
         }
@@ -34,73 +34,71 @@ function tryMatchUsers() {
     }
 }
 
-// ========== Broadcast User Count ==========
+// Broadcast the number of connected users
 function broadcastUserCount() {
     io.emit('userCount', io.engine.clientsCount);
 }
 
-// ========== Socket.IO Connection Handling ==========
+// Socket.IO Event Handling
 io.on('connection', socket => {
     console.log(`User connected: ${socket.id}`);
     broadcastUserCount();
 
-    // Add user to waiting queue and try to match
+    // Add user to queue and attempt match
     waitingQueue.push(socket.id);
     tryMatchUsers();
 
-    // Offer relay
+    // === Signaling Messages ===
     socket.on('offer', ({ offer, to }) => {
-        socket.to(to).emit('offer', { offer, from: socket.id });
+        io.to(to).emit('offer', { offer, from: socket.id });
     });
 
-    // Answer relay
     socket.on('answer', ({ answer, to }) => {
-        socket.to(to).emit('answer', { answer });
+        io.to(to).emit('answer', { answer });
     });
 
-    // ICE candidate relay
     socket.on('ice-candidate', ({ candidate, to }) => {
-        socket.to(to).emit('ice-candidate', { candidate });
+        io.to(to).emit('ice-candidate', { candidate });
     });
 
-    // User clicks "Next"
+    // === User Clicked "Next" ===
     socket.on('next', () => {
         const partnerId = activePairs.get(socket.id);
         if (!partnerId) return;
 
-        // Notify partner
-        io.to(partnerId).emit('peer-disconnected');
+        console.log(`Next: ${socket.id} and ${partnerId} disconnected`);
 
-        console.log(`Next: Unmatched ${socket.id} & ${partnerId}`);
+        // Notify the current partner
+        io.to(partnerId).emit('peer-disconnected');
 
         // Remove both from active pairs
         activePairs.delete(socket.id);
         activePairs.delete(partnerId);
 
-        // Requeue both users
-        waitingQueue.push(socket.id);
-        waitingQueue.push(partnerId);
-
+        // Re-add both to the waiting queue
+        waitingQueue.push(socket.id, partnerId);
         tryMatchUsers();
     });
 
-    // Handle disconnects
+    // === Handle Disconnection ===
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${socket.id}`);
         broadcastUserCount();
 
-        // Remove from waiting queue if present
+        // Remove from queue
         const index = waitingQueue.indexOf(socket.id);
         if (index !== -1) {
             waitingQueue.splice(index, 1);
         }
 
-        // Notify partner and cleanup
+        // Notify partner if matched
         const partnerId = activePairs.get(socket.id);
         if (partnerId) {
+            console.log(`Notifying ${partnerId} about ${socket.id}'s disconnection`);
             io.to(partnerId).emit('peer-disconnected');
-            activePairs.delete(partnerId);
+
             activePairs.delete(socket.id);
+            activePairs.delete(partnerId);
 
             // Requeue partner
             waitingQueue.push(partnerId);
@@ -109,14 +107,15 @@ io.on('connection', socket => {
     });
 });
 
-// ========== Static File Serving ==========
+// === Serve Static Files ===
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Default route (can be changed as needed)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// ========== Start Server ==========
+// Start server
 server.listen(PORT, () => {
-    console.log(`🚀 Server running at: http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });

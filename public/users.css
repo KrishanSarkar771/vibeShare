@@ -1,197 +1,228 @@
-/*
-         * ====================================================================
-         * Global & Base Styles
-         * ====================================================================
-         */
-        
-        html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          font-family: 'Poppins', 'Arial', sans-serif;
-          box-sizing: border-box;
-        }
-        
-        *, *::before, *::after {
-          box-sizing: inherit;
-        }
-        
-        /*
-         * ====================================================================
-         * Body Styling (Main Layout)
-         * ====================================================================
-         */
-        body {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          background: linear-gradient(135deg, #4B00FF 0%, #8A2BE2 100%);
-          padding: 30px 20px;
-          color: #FFFFFF;
-          min-height: 100vh;
-        }
+/* === Base Reset === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  box-sizing: border-box;
+}
 
-        h1 {
-            text-align: center;
-        }
-        
-        /*
-         * ====================================================================
-         * Status & User ID Section
-         * ====================================================================
-         */
-        #myId, #status {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            font-weight: 600;
-            width: 100%;
-            max-width: 1000px;
-            text-align: left;
-        }
-        #status {
-            color: #FFD700;
-            margin-bottom: 25px;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        /*
-         * ====================================================================
-         * Users Container & List
-         * ====================================================================
-         */
-        .users-container {
-          width: 100%;
-          max-width: 1000px;
-          text-align: left;
-          margin-bottom: 30px;
-        }
-        
-        #users {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 10px 0;
-        }
-        
-        /* User Button Styling (Interactive Elements) */
-        #users button {
-            padding: 10px 20px;
-            background-color: #FFFFFF;
-            color: #4B00FF;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease-in-out;
-            user-select: none;
-        }
-        
-        #users button:hover {
-            background-color: #E6E6FA;
-            color: #3300AA;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        #users button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 
-        .footer {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 1000px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
+/* === Body Layout === */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #4B00FF 0%, #8A2BE2 100%);
+  padding: 30px 20px;
+  color: #FFFFFF;
+  min-height: 100vh;
+}
 
-        .footer button {
-            padding: 10px 20px;
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease-in-out;
-            user-select: none;
-        }
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-        .footer button.next {
-            background-color: #4CAF50;
-        }
+/* === Status & ID Section === */
+#myId, 
+#status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+}
 
-        .footer button:disabled {
-            background-color: #9e9e9e;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        /*
-         * ====================================================================
-         * Video Section
-         * ====================================================================
-         */
-        .videos {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 30px;
-          width: 100%;
-          max-width: 1000px;
-          margin-top: 30px;
-        }
-        
-        #local-video,
-        #remote-video {
-          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-          border: 4px solid #FFFFFF;
-          border-radius: 16px;
-          width: 100%;
-          max-width: 450px;
-          aspect-ratio: 1 / 1;
-          object-fit: cover;
-          background: #1a1a1a;
-          transition: transform 0.3s ease-in-out;
-        }
-        
-        #remote-video:hover {
-          transform: scale(1.02);
-        }
-        
-        /*
-         * ====================================================================
-         * Responsive Design (Mobile Optimizations)
-         * ====================================================================
-         */
-        @media (max-width: 768px) {
-          body {
-            padding: 20px 15px;
-          }
-        
-          .videos {
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-          }
-        
-          #local-video,
-          #remote-video {
-            max-width: 100%;
-            aspect-ratio: 16 / 9;
-          }
-        }
-        
-        @media (max-width: 480px) {
-            #users button {
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
-        }
+#status {
+  color: #FFD700;
+  margin: 5px 0 20px 0;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* === Users Container Header (with count) === */
+.users-container {
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 30px;
+}
+
+.users-header {
+  display: flex;
+  justify-content: space-between; /* label on left, count on right */
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.users-header p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* === Users List === */
+#users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+/* User Buttons */
+#users button {
+  padding: 10px 20px;
+  background-color: #FFFFFF;
+  color: #4B00FF;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+#users button:hover {
+  background-color: #E6E6FA;
+  color: #3300AA;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#users button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* === Footer Buttons === */
+.footer {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+/* Stop Video button (red) */
+#video-button {
+  background-color: #f44336;
+  color: white;
+}
+
+#video-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Mute / Audio button (blue) */
+#audio-button {
+  background-color: #2196F3;
+  color: white;
+}
+
+#audio-button:hover {
+  background-color: #1976D2;
+}
+
+#audio-button:active {
+  background-color: #0D47A1;
+}
+
+#audio-button.muted {
+  background-color: #9e9e9e; /* Grey when muted */
+  color: #ffffff;
+}
+
+/* Next button (green) */
+#next-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#next-button:hover {
+  background-color: #388E3C;
+}
+
+/* Disabled state */
+.footer button:disabled {
+  background-color: #9e9e9e;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* === Video Section === */
+.videos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 30px;
+}
+
+#local-video,
+#remote-video {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  border: 4px solid #FFFFFF;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #1a1a1a;
+  transition: transform 0.3s ease-in-out;
+}
+
+#remote-video:hover {
+  transform: scale(1.02);
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 15px;
+  }
+
+  .videos {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #local-video,
+  #remote-video {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 480px) {
+  #users button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .footer button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+/* === End of users.css === */
